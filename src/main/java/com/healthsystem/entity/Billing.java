@@ -3,7 +3,7 @@ package com.healthsystem.entity;
 import java.time.LocalDateTime;
 
 public class Billing {
-    private int id;
+    private String id;
     private Patient patient;
     private Appointment appointment;
     private Doctor doctor;
@@ -12,7 +12,7 @@ public class Billing {
     private double amount;
     private String paymentStatus;
 
-    public Billing(int id, Patient patient, Appointment appointment, Doctor doctor, String invoiceNumber, LocalDateTime transactionDate, double amount, String paymentStatus) {
+    public Billing(String id, Patient patient, Appointment appointment, Doctor doctor, String invoiceNumber, LocalDateTime transactionDate, double amount, String paymentStatus) {
         this.id = id;
         this.patient = patient;
         this.appointment = appointment;
@@ -23,7 +23,7 @@ public class Billing {
         this.paymentStatus = paymentStatus;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

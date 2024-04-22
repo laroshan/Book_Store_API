@@ -1,9 +1,12 @@
 package com.healthsystem.dao;
 
 import com.healthsystem.entity.Patient;
+import com.healthsystem.exception.HealthSystemException;
 
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PatientDAO {
     private List<Patient> patients = new ArrayList<>();
@@ -16,27 +19,25 @@ public class PatientDAO {
         return patients;
     }
 
-    public Patient getPatientById(int id) {
-        return patients.stream()
-                .filter(patient -> patient.getName().hashCode() == id)
-                .findFirst()
-                .orElse(null);
-    }
-
-    public void updatePatient(int id, Patient updatedPatient) {
-        int index = -1;
-        for (int i = 0; i < patients.size(); i++) {
-            if (patients.get(i).getName().hashCode() == id) {
-                index = i;
-                break;
-            }
-        }
-        if (index != -1) {
-            patients.set(index, updatedPatient);
+    public Patient getPatientById(String id) {
+        Optional<Patient> patient = patients.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst();
+        if (patient.isPresent()) {
+            return patient.get();
+        } else {
+            throw new HealthSystemException("Patient not found", Response.Status.NOT_FOUND);
         }
     }
 
-    public void deletePatient(int id) {
-        patients.removeIf(patient -> patient.getName().hashCode() == id);
+    public void updatePatient(String id, Patient updatedPatient) {
+        Patient existing = getPatientById(id);
+        int index = patients.indexOf(existing);
+        patients.set(index, updatedPatient);
+    }
+
+    public void deletePatient(String id) {
+        Patient existing = getPatientById(id);
+        patients.remove(existing);
     }
 }

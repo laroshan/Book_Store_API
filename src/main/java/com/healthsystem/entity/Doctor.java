@@ -3,8 +3,8 @@ package com.healthsystem.entity;
 public class Doctor extends Person {
     private String specialty;
 
-    public Doctor(String name, String contact, String address, String specialty) {
-        super(name, contact, address);
+    public Doctor(String id, String name, String contact, String address, String specialty) {
+        super(id, name, contact, address);
         this.specialty = specialty;
     }
 

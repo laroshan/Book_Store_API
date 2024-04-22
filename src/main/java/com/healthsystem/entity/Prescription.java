@@ -1,7 +1,7 @@
 package com.healthsystem.entity;
 
 public class Prescription {
-    private int id;
+    private String id;
     private Patient patient;
     private Doctor doctor;
     private String medication;
@@ -9,7 +9,7 @@ public class Prescription {
     private String instructions;
     private int duration;
 
-    public Prescription(int id, Patient patient, Doctor doctor, String medication, String dosage, String instructions, int duration) {
+    public Prescription(String id, Patient patient, Doctor doctor, String medication, String dosage, String instructions, int duration) {
         this.id = id;
         this.patient = patient;
         this.doctor = doctor;
@@ -19,7 +19,7 @@ public class Prescription {
         this.duration = duration;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
