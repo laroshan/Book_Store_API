@@ -1,18 +1,29 @@
-package com.healthsystem.resorce;
+package com.healthsystem.resource;
 
 import com.healthsystem.dao.DoctorDAO;
 import com.healthsystem.entity.Doctor;
 import com.healthsystem.exception.HealthSystemException;
+import jakarta.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.*;
+
+import jakarta.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 
 @Path("/doctors")
 public class DoctorResource {
+
+    @POST
+    @Path("/sample")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response testEndpoint(Map<String, Object> data) {
+        return Response.ok(data).build();
+    }
+
     private DoctorDAO doctorDAO = new DoctorDAO();
     private static final Logger logger = LoggerFactory.getLogger(DoctorResource.class);
 

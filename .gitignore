@@ -1,0 +1,30 @@
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+out/
+
+# Maven-specific files
+target/
+dependency-reduced-pom.xml
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+
+# Gradle-specific files
+.gradle/
+build/
+!build.gradle
+
+# Node modules (if using Node.js tools)
+node_modules/
+
+# Operating system-specific files
+.DS_Store
+Thumbs.db

@@ -12,6 +12,11 @@ public class Person {
         this.contact = contact;
         this.address = address;
     }
+
+    public Person() {
+
+    }
+
     public String getId() {
         return id;
     }

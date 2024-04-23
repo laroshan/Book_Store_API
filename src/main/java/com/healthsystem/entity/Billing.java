@@ -27,31 +27,63 @@ public class Billing {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Patient getPatient() {
         return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Appointment getAppointment() {
         return appointment;
     }
 
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
+
     public Doctor getDoctor() {
         return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public String getInvoiceNumber() {
         return invoiceNumber;
     }
 
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
+
     public LocalDateTime getTransactionDate() {
         return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
     public double getAmount() {
         return amount;
     }
 
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
     public String getPaymentStatus() {
         return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }

@@ -23,27 +23,55 @@ public class Prescription {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Patient getPatient() {
         return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Doctor getDoctor() {
         return doctor;
     }
 
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
     public String getMedication() {
         return medication;
+    }
+
+    public void setMedication(String medication) {
+        this.medication = medication;
     }
 
     public String getDosage() {
         return dosage;
     }
 
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
     public String getInstructions() {
         return instructions;
     }
 
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
     public int getDuration() {
         return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

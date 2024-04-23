@@ -1,19 +1,25 @@
 package com.healthsystem.entity;
 
-import java.time.LocalDateTime;
+import com.healthsystem.entity.Doctor;
+import com.healthsystem.entity.Patient;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Appointment {
     private String id;
     private Patient patient;
     private Doctor doctor;
-    private LocalDateTime dateTime;
+    private LocalDate date;
+    private LocalTime time;
     private String reason;
 
-    public Appointment(String id, Patient patient, Doctor doctor, LocalDateTime dateTime, String reason) {
+    public Appointment(String id, Patient patient, Doctor doctor, LocalDate date, LocalTime time, String reason) {
         this.id = id;
         this.patient = patient;
         this.doctor = doctor;
-        this.dateTime = dateTime;
+        this.date = date;
+        this.time = time;
         this.reason = reason;
     }
 
@@ -21,19 +27,47 @@ public class Appointment {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Patient getPatient() {
         return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public Doctor getDoctor() {
         return doctor;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public String getReason() {
         return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

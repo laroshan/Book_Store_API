@@ -1,4 +1,4 @@
-package com.healthsystem.resorce;
+package com.healthsystem.resource;
 
 import com.healthsystem.entity.Appointment;
 import com.healthsystem.dao.AppointmentDAO;
@@ -6,11 +6,10 @@ import com.healthsystem.exception.HealthSystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
-import java.util.Optional;
 
 @Path("/appointments")
 public class AppointmentResource {
@@ -31,12 +30,18 @@ public class AppointmentResource {
         }
     }
 
-    @GET
-    @Path("/getAll")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Appointment> getAllAppointments() {
-        return appointmentDAO.getAllAppointments();
-    }
+//    @GET
+//    @Path("/getAll")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List<Appointment> getAllAppointments() {
+//        return appointmentDAO.getAllAppointments();
+//    }
+@GET
+@Path("/getAll")
+@Produces(MediaType.APPLICATION_JSON)
+public String getAllAppointments() {
+    return "helloworld";
+}
 
     @GET
     @Path("/get/{id}")

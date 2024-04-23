@@ -3,13 +3,13 @@ package com.healthsystem.dao;
 import com.healthsystem.entity.MedicalRecord;
 import com.healthsystem.exception.HealthSystemException;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class MedicalRecordDAO {
-    private final List<MedicalRecord> medicalRecords;
+    private  List<MedicalRecord> medicalRecords;
 
     public MedicalRecordDAO() {
         this.medicalRecords = new ArrayList<>();
