@@ -7,10 +7,16 @@ import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class DoctorDAO {
     private List<Doctor> doctors = new ArrayList<>();
-
+    public DoctorDAO() {
+        // Create some fake doctors with unique IDs
+        doctors.add(new Doctor(UUID.randomUUID().toString(), "Dr. Alice Johnson", "123-456-7891", "123 Health St., Wellness City", "Dermatology"));
+        doctors.add(new Doctor(UUID.randomUUID().toString(), "Dr. Bob Smith", "234-567-8902", "234 Health St., Wellness City", "Cardiology"));
+        doctors.add(new Doctor(UUID.randomUUID().toString(), "Dr. Charlie Brown", "345-678-9013", "345 Health St., Wellness City", "Pediatrics"));
+    }
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);
     }

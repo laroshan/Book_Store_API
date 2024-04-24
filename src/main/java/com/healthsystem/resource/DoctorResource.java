@@ -1,5 +1,6 @@
 package com.healthsystem.resource;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.healthsystem.dao.DoctorDAO;
 import com.healthsystem.entity.Doctor;
 import com.healthsystem.exception.HealthSystemException;
@@ -15,15 +16,6 @@ import java.util.Map;
 
 @Path("/doctors")
 public class DoctorResource {
-
-    @POST
-    @Path("/sample")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response testEndpoint(Map<String, Object> data) {
-        return Response.ok(data).build();
-    }
-
     private DoctorDAO doctorDAO = new DoctorDAO();
     private static final Logger logger = LoggerFactory.getLogger(DoctorResource.class);
 
