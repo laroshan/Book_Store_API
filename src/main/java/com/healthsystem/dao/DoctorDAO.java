@@ -1,6 +1,8 @@
 package com.healthsystem.dao;
 
 import com.healthsystem.entity.Doctor;
+import com.healthsystem.exception.HealthSystemException;
+import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,9 @@ public class DoctorDAO {
     }
 
     public void addDoctor(Doctor doctor) {
+        if (doctors.stream().anyMatch(d -> d.getId().equals(doctor.getId()))) {
+            throw new HealthSystemException("Duplicate ID: " + doctor.getId(), Response.Status.CONFLICT);
+        }
         doctors.add(doctor);
     }
 

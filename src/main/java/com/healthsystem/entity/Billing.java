@@ -1,26 +1,26 @@
 package com.healthsystem.entity;
 
-import java.time.LocalDateTime;
-
 public class Billing {
     private String id;
-    private Patient patient;
-    private Appointment appointment;
-    private Doctor doctor;
-    private String invoiceNumber;
-    private LocalDateTime transactionDate;
-    private double amount;
-    private String paymentStatus;
+    private String doctorId;
+    private String patientId;
+    private String amount;
+    private String status;
+    private String date;
 
-    public Billing(String id, Patient patient, Appointment appointment, Doctor doctor, String invoiceNumber, LocalDateTime transactionDate, double amount, String paymentStatus) {
+    private Doctor doctor;
+    private Patient patient;
+
+    public Billing() {
+    }
+
+    public Billing(String id, String doctorId, String patientId, String amount, String status, String date) {
         this.id = id;
-        this.patient = patient;
-        this.appointment = appointment;
-        this.doctor = doctor;
-        this.invoiceNumber = invoiceNumber;
-        this.transactionDate = transactionDate;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
         this.amount = amount;
-        this.paymentStatus = paymentStatus;
+        this.status = status;
+        this.date = date;
     }
 
     public String getId() {
@@ -31,20 +31,44 @@ public class Billing {
         this.id = id;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getDoctorId() {
+        return doctorId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Doctor getDoctor() {
@@ -55,35 +79,11 @@ public class Billing {
         this.doctor = doctor;
     }
 
-    public String getInvoiceNumber() {
-        return invoiceNumber;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setInvoiceNumber(String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-    public LocalDateTime getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(LocalDateTime transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

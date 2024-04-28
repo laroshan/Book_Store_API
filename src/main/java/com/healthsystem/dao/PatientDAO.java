@@ -9,25 +9,38 @@ import java.util.List;
 import java.util.Optional;
 
 public class PatientDAO {
-    private List<Patient> patients = new ArrayList<>();
+    private static PatientDAO instance;
+    private List<Patient> patients;
+
+    // Private constructor to prevent instantiation
+    private PatientDAO() {
+        this.patients = new ArrayList<>();
+    }
+
+    // Singleton instance getter
+    public static PatientDAO getInstance() {
+        if (instance == null) {
+            instance = new PatientDAO();
+        }
+        return instance;
+    }
 
     public void addPatient(Patient patient) {
+        if (patients.stream().anyMatch(p -> p.getId().equals(patient.getId()))) {
+            throw new HealthSystemException("Duplicate ID: " + patient.getId(), Response.Status.CONFLICT);
+        }
         patients.add(patient);
     }
 
     public List<Patient> getAllPatients() {
-        return patients;
+        return new ArrayList<>(patients);
     }
 
     public Patient getPatientById(String id) {
-        Optional<Patient> patient = patients.stream()
-                .filter(p -> p.getId() == id)
-                .findFirst();
-        if (patient.isPresent()) {
-            return patient.get();
-        } else {
-            throw new HealthSystemException("Patient not found", Response.Status.NOT_FOUND);
-        }
+        return patients.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new HealthSystemException("Patient not found", Response.Status.NOT_FOUND));
     }
 
     public void updatePatient(String id, Patient updatedPatient) {

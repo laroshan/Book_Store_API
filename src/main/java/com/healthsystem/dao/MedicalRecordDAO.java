@@ -1,42 +1,75 @@
 package com.healthsystem.dao;
 
-import com.healthsystem.entity.MedicalRecord;
+import com.healthsystem.entity.*;
 import com.healthsystem.exception.HealthSystemException;
 
 import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class MedicalRecordDAO {
-    private  List<MedicalRecord> medicalRecords;
+    private static MedicalRecordDAO instance;
+    private List<MedicalRecord> medicalRecords;
 
-    public MedicalRecordDAO() {
+    private MedicalRecordDAO() {
         this.medicalRecords = new ArrayList<>();
     }
 
-    // Create a new medical record
-    public void addMedicalRecord(MedicalRecord record) {
-        medicalRecords.add(record);
+    public static MedicalRecordDAO getInstance() {
+        if (instance == null) {
+            instance = new MedicalRecordDAO();
+        }
+        return instance;
     }
 
-    // Read all medical records
+    public void addMedicalRecord(MedicalRecord medicalRecord) {
+        if (medicalRecords.stream().anyMatch(mr -> mr.getId().equals(medicalRecord.getId()))) {
+            throw new HealthSystemException("Duplicate ID: " + medicalRecord.getId(), Response.Status.CONFLICT);
+        }
+        medicalRecords.add(medicalRecord);
+    }
+
     public List<MedicalRecord> getAllMedicalRecords() {
-        return new ArrayList<>(medicalRecords);
+        DoctorDAO doctorDAO = DoctorDAO.getInstance();
+        PatientDAO patientDAO = PatientDAO.getInstance();
+        List<MedicalRecord> detailedMedicalRecords = new ArrayList<>();
+
+        for (MedicalRecord medicalRecord : medicalRecords) {
+            Doctor doctor = doctorDAO.getDoctorById(medicalRecord.getDoctorId());
+            Patient patient = patientDAO.getPatientById(medicalRecord.getPatientId());
+
+            medicalRecord.setDoctor(doctor);
+            medicalRecord.setPatient(patient);
+
+            detailedMedicalRecords.add(medicalRecord);
+        }
+
+        return detailedMedicalRecords;
     }
 
     public MedicalRecord getMedicalRecordById(String id) {
-        Optional<MedicalRecord> record = medicalRecords.stream()
-                .filter(r -> r.getId() == id)
-                .findFirst();
-        if (record.isPresent()) {
-            return record.get();
-        } else {
-            throw new HealthSystemException("Medical record not found", Response.Status.NOT_FOUND);
-        }
+
+        DoctorDAO doctorDAO = DoctorDAO.getInstance();
+        PatientDAO patientDAO = PatientDAO.getInstance();
+        MedicalRecord medicalRecord = medicalRecords.stream()
+                .filter(mr -> mr.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new HealthSystemException("Medical Record not found", Response.Status.NOT_FOUND));
+
+        Doctor doctor = doctorDAO.getDoctorById(medicalRecord.getDoctorId());
+        Patient patient = patientDAO.getPatientById(medicalRecord.getPatientId());
+
+        medicalRecord.setDoctor(doctor);
+        medicalRecord.setPatient(patient);
+
+        return medicalRecord;
     }
 
     public void updateMedicalRecord(String id, MedicalRecord updatedRecord) {
+        if (!id.equals(updatedRecord.getId())) {
+            throw new HealthSystemException("ID mismatch", Response.Status.BAD_REQUEST);
+        }
+
         MedicalRecord existing = getMedicalRecordById(id);
         int index = medicalRecords.indexOf(existing);
         medicalRecords.set(index, updatedRecord);
@@ -46,5 +79,4 @@ public class MedicalRecordDAO {
         MedicalRecord existing = getMedicalRecordById(id);
         medicalRecords.remove(existing);
     }
-
 }
