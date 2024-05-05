@@ -9,6 +9,8 @@ public class Patient extends Person {
         this.medicalHistory = medicalHistory;
         this.currentHealthStatus = currentHealthStatus;
     }
+    public Patient() {
+    }
 
     public String getMedicalHistory() {
         return medicalHistory;

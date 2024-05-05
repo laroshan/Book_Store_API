@@ -2,20 +2,24 @@ package com.healthsystem.entity;
 
 public class Prescription {
     private String id;
-    private Patient patient;
-    private Doctor doctor;
+    private String doctorId;
+    private String patientId;
     private String medication;
     private String dosage;
-    private String instructions;
-    private int duration;
+    private String duration;
 
-    public Prescription(String id, Patient patient, Doctor doctor, String medication, String dosage, String instructions, int duration) {
+    private Doctor doctor;
+    private Patient patient;
+
+    public Prescription() {
+    }
+
+    public Prescription(String id, String doctorId, String patientId, String medication, String dosage, String duration) {
         this.id = id;
-        this.patient = patient;
-        this.doctor = doctor;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
         this.medication = medication;
         this.dosage = dosage;
-        this.instructions = instructions;
         this.duration = duration;
     }
 
@@ -27,20 +31,20 @@ public class Prescription {
         this.id = id;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getDoctorId() {
+        return doctorId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
     public String getMedication() {
@@ -59,19 +63,28 @@ public class Prescription {
         this.dosage = dosage;
     }
 
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
-
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 }
+

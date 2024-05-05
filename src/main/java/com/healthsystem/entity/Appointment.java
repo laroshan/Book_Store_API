@@ -1,28 +1,29 @@
 package com.healthsystem.entity;
 
-import com.healthsystem.entity.Doctor;
-import com.healthsystem.entity.Patient;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Appointment {
     private String id;
-    private Patient patient;
-    private Doctor doctor;
-    private LocalDate date;
-    private LocalTime time;
+    private String doctorId;
+    private String patientId;
+    private String date;
+    private String time;
     private String reason;
 
-    public Appointment(String id, Patient patient, Doctor doctor, LocalDate date, LocalTime time, String reason) {
+    private Doctor doctor;
+    private Patient patient;
+
+    // Constructors, getters, and setters
+    public Appointment() {}
+
+    public Appointment(String id, String doctorId, String patientId, String date, String time, String reason) {
         this.id = id;
-        this.patient = patient;
-        this.doctor = doctor;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
         this.date = date;
         this.time = time;
         this.reason = reason;
     }
 
+    // Getters and setters
     public String getId() {
         return id;
     }
@@ -31,12 +32,44 @@ public class Appointment {
         this.id = id;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getDoctorId() {
+        return doctorId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     public Doctor getDoctor() {
@@ -47,27 +80,11 @@ public class Appointment {
         this.doctor = doctor;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }

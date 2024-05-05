@@ -2,23 +2,33 @@ package com.healthsystem.resource;
 
 import com.healthsystem.dao.DoctorDAO;
 import com.healthsystem.entity.Doctor;
+import com.healthsystem.exception.HealthSystemException;
+
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.List;
 
 @Path("/doctors")
 public class DoctorResource {
-    private DoctorDAO doctorDAO = DoctorDAO.getInstance(); // Use the singleton instance
+    private static final Logger logger = LoggerFactory.getLogger(DoctorResource.class);
+    private DoctorDAO doctorDAO = DoctorDAO.getInstance();
 
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addDoctor(Doctor doctor) {
-        doctorDAO.addDoctor(doctor);
-        return Response.status(Response.Status.CREATED).entity(doctor).build();
+        try {
+            doctorDAO.addDoctor(doctor);
+            return Response.status(Response.Status.CREATED).entity(doctor).build();
+        } catch (Exception e) {
+            logger.error("Error adding doctor: {}", e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error adding doctor").build();
+        }
     }
 
     @GET
@@ -35,7 +45,8 @@ public class DoctorResource {
         try {
             Doctor doctor = doctorDAO.getDoctorById(id);
             return Response.ok(doctor).build();
-        } catch (RuntimeException e) {
+        } catch (HealthSystemException e) {
+            logger.error("Error retrieving doctor: {}", e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity("Doctor not found").build();
         }
     }
@@ -45,9 +56,14 @@ public class DoctorResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateDoctor(@PathParam("id") String id, Doctor updatedDoctor) {
         try {
+            if (!id.equals(updatedDoctor.getId())) {
+                return Response.status(Response.Status.BAD_REQUEST).entity("ID mismatch").build();
+            }
+
             doctorDAO.updateDoctor(id, updatedDoctor);
-            return Response.noContent().build();
-        } catch (RuntimeException e) {
+            return Response.ok("Doctor updated successfully").build();
+        } catch (HealthSystemException e) {
+            logger.error("Error updating doctor: {}", e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity("Doctor not found").build();
         }
     }
@@ -57,8 +73,9 @@ public class DoctorResource {
     public Response deleteDoctor(@PathParam("id") String id) {
         try {
             doctorDAO.deleteDoctor(id);
-            return Response.noContent().build();
-        } catch (RuntimeException e) {
+            return Response.ok("Doctor deleted successfully").build();
+        } catch (HealthSystemException e) {
+            logger.error("Error deleting doctor: {}", e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity("Doctor not found").build();
         }
     }
