@@ -7,8 +7,7 @@ public class JerseyApplication extends ResourceConfig {
     public JerseyApplication() {
         packages(
                 "com.bookStore.resource",
-                "com.bookStore.exception" // include your mapper here
-        );
+                "com.bookStore.exception");
         register(JacksonFeature.class);
     }
 }
