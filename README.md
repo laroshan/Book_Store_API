@@ -1,18 +1,17 @@
-````markdown
-# Health System API
+# Book Store API
 
-The Health System API is a RESTful service for managing healthcare-related data, including doctors, patients, appointments, medical records, prescriptions, and billing information. Built with Java and JAX-RS, it supports CRUD operations for each entity.
+The Book Store API is a RESTful service for managing book-related data, including books, authors, customers, orders, and carts. Built with Java and JAX-RS, it supports CRUD operations for each entity.
 
 ## Setup and Installation
 
-To run the Health System API, follow these steps:
+To run the Book Store API, follow these steps:
 
 1. **Clone the Repository**:
+
    ```bash
-   git clone <your-repository-url>
-   cd <your-repository-directory>
+   git clone https://github.com/laroshan/Book_Store_API.git
+   cd Book_Store_API
    ```
-````
 
 2. **Ensure Java and Maven are Installed**:
 
@@ -35,59 +34,52 @@ To run the Health System API, follow these steps:
 
 Here are the key endpoints:
 
-- **Doctor**:
+- **Books**:
 
-  - `POST /doctors/add`
-  - `GET /doctors/getAll`
-  - `GET /doctors/get/{id}`
-  - `PUT /doctors/update/{id}`
-  - `DELETE /doctors/delete/{id}`
+  - `POST /books/add`
+  - `GET /books/getAll`
+  - `GET /books/get/{id}`
+  - `PUT /books/update/{id}`
+  - `DELETE /books/delete/{id}`
 
-- **Patient**:
+- **Authors**:
 
-  - `POST /patients/add`
-  - `GET /patients/getAll`
-  - `GET /patients/get/{id}`
-  - `PUT /patients/update/{id}`
-  - `DELETE /patients/delete/{id}`
+  - `POST /authors/add`
+  - `GET /authors/getAll`
+  - `GET /authors/get/{id}`
+  - `PUT /authors/update/{id}`
+  - `DELETE /authors/delete/{id}`
 
-- **Appointment**:
+- **Customers**:
 
-  - `POST /appointments/add`
-  - `GET /appointments/getAll`
-  - `GET /appointments/get/{id}`
-  - `PUT /appointments/update/{id}`
-  - `DELETE /appointments/delete/{id}`
+  - `POST /customers/add`
+  - `GET /customers/getAll`
+  - `GET /customers/get/{id}`
+  - `PUT /customers/update/{id}`
+  - `DELETE /customers/delete/{id}`
 
-- **Medical Record**:
+- **Orders**:
 
-  - `POST /medicalrecords/add`
-  - `GET /medicalrecords/getAll`
-  - `GET /medicalrecords/get/{id}`
-  - `PUT /medicalrecords/update/{id}`
-  - `DELETE /medicalrecords/delete/{id}`
+  - `POST /orders/add`
+  - `GET /orders/getAll`
+  - `GET /orders/get/{id}`
+  - `PUT /orders/update/{id}`
+  - `DELETE /orders/delete/{id}`
 
-- **Prescription**:
+- **Carts**:
 
-  - `POST /prescriptions/add`
-  - `GET /prescriptions/getAll`
-  - `GET /prescriptions/get/{id}`
-  - `PUT /prescriptions/update/{id}`
-  - `DELETE /prescriptions/delete/{id}`
-
-- **Billing**:
-  - `POST /billings/add`
-  - `GET /billings/getAll`
-  - `GET /billings/get/{id}`
-  - `PUT /billings/update/{id}`
-  - `DELETE /billings/delete/{id}`
+  - `POST /carts/add`
+  - `GET /carts/getAll`
+  - `GET /carts/get/{id}`
+  - `PUT /carts/update/{id}`
+  - `DELETE /carts/delete/{id}`
 
 ## Usage
 
-To interact with the API, you can use tools like `curl` or `Postman`. Here's an example of how to add a new doctor using `curl`:
+To interact with the API, you can use tools like `curl` or `Postman`. Here's an example of how to add a new book using `curl`:
 
 ```bash
-curl -X POST 'http://localhost:8087/doctors/add' \
+curl -X POST 'http://localhost:8087/books/add' \
   -H 'Content-Type: application/json' \
-  -d '{"id": "Doc1", "name": "Dr. Alice Johnson", "contact": "123-456-7891", "address": "123 Health St.", "specialty": "Dermatology"}'
+  -d '{"id": "Book1", "title": "Effective Java", "authorId": "Author1", "price": 45.99, "stock": 10}'
 ```
