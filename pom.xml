@@ -21,7 +21,7 @@
 
 
     <groupId>groupId</groupId>
-    <artifactId>HealthSystemAPI</artifactId>
+    <artifactId>BookStoreAPI</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <properties>
