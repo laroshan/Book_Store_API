@@ -22,7 +22,7 @@ release.properties
 build/
 !build.gradle
 
-# Node modules (if using Node.js tools)
+# Node modules (if we using Node.js tools)
 node_modules/
 
 # Operating system-specific files
